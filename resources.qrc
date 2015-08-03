@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/plugins/pygisedtrend">
+    <file>down.png</file>
+    <file>up.png</file>
+    <file>logogeoceano transparent.png</file>
+    <file>icon.png</file>
+  </qresource>
+</RCC>
