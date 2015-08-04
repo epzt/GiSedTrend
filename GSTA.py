@@ -529,7 +529,7 @@ class GSTA():
         dt = (2.0 * math.pi) / (nedges - 1.0)
         atob = 1.0 / ratio
         
-        # Direction is given in degrees, so is tranlate in radians
+        # Direction is given in degrees, so is translate in radians
         # and shift from geometric to geographic direction
         costetha = math.cos(((90.0-direction) * math.pi) / 180.0)
         sintetha = math.sin(((90.0-direction) * math.pi) / 180.0)

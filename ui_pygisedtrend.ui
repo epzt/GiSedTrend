@@ -51,7 +51,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -207,64 +207,32 @@
      <property name="title">
       <string>Select data from...</string>
      </property>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>41</y>
-       <width>651</width>
-       <height>29</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_10">
-      <item>
-       <widget class="QPushButton" name="pushButtonShapefile">
-        <property name="text">
-         <string>Shapefile...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::MinimumExpanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>60</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonTextFile">
-        <property name="text">
-         <string> Texte file...</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::MinimumExpanding</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>60</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
+     <widget class="QPushButton" name="pushButtonTextFile">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>30</y>
+        <width>95</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string> Texte file...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="GSTATemporaryLayerButton">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>30</y>
+        <width>263</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>From previous GSTA temporary layer</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QPushButton" name="pushButtonDeteleRow">
      <property name="geometry">
@@ -304,6 +272,19 @@ p, li { white-space: pre-wrap; }
        <widget class="QTableWidget" name="tableWidgetData"/>
       </item>
      </layout>
+    </widget>
+    <widget class="QPushButton" name="pushButtonShapefile">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>40</y>
+       <width>92</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Shapefile...</string>
+     </property>
     </widget>
     <zorder>layoutWidget</zorder>
     <zorder>groupBox_6</zorder>

@@ -32,6 +32,7 @@ import processing
 
 # Minimum number of fields needed (with Z)
 GSTAMINFIELDCOUNT = 6
+GSTALAYERNAME = "GSTA_temporary_layer"
 
 # -------------------------------------------------------
 # -------------------------------------------------------
@@ -367,7 +368,7 @@ class pygisedtrendAttributeConnectDialog(QtGui.QDialog, Ui_pygisedtrend_attribut
         # Verify that all the need fields have been defined
         values = self.dictLinks.keys()
         if not u"Mean" in values and not u"Sorting" in values and not u"Skewness" in values:
-            QtGui.QMessageBox.critical(self, u"Shapefile import", u"You have to set each GSTA value.")
+            QtGui.QMessageBox.critical(self, u"Shapefile import", u"You have to set each needed GSTA value, i.e. mean, sorting and skewness.")
             return False
         
         # To be sure that no selection is active yet
@@ -424,6 +425,7 @@ class pygisedtrendDialog(QtGui.QDialog, Ui_pygisedtrend):
         QtCore.QObject.connect(self.sliderAnisotropyTolerance, QtCore.SIGNAL("valueChanged(int)"),self.setAnisotropyTolerance)
         QtCore.QObject.connect(self.groupAnisotropy, QtCore.SIGNAL("toggled(bool)"), self.computeAnisotropy)
         QtCore.QObject.connect(self.refreshBarrierListButton, QtCore.SIGNAL("clicked()"), self.updateBarrierLayerList)
+        QtCore.QObject.connect(self.GSTATemporaryLayerButton, QtCore.SIGNAL("clicked()"), self.loadFromGSTATemporaryLayer)
         self.barrierLayerListWidget.itemClicked.connect(self.barrierLayer)
         QtCore.QObject.connect(self.buttonExportResults, QtCore.SIGNAL("clicked()"), self.exportResults)
         
@@ -440,6 +442,7 @@ class pygisedtrendDialog(QtGui.QDialog, Ui_pygisedtrend):
         self.pushButtonDeteleRow.setEnabled(False)
         
         self.updateBarrierLayerList()
+        self.updateGSTALayerButtonStatus()
     
     # -----------------------------------------------------
     # Set XOR state
@@ -573,8 +576,59 @@ class pygisedtrendDialog(QtGui.QDialog, Ui_pygisedtrend):
        projSelector.setMessage(u"Select projection for %s" % textFileName)
        projSelector.exec_()
        self.gsta = GSTA(projSelector.selectedAuthId())
-       
 
+    #------------------------------------------------------
+    # A wrapper to help selecting a vector layer by name
+    def getVectorLayerByName(self, layerName):
+        layer = QgsMapLayerRegistry.instance().mapLayersByName(GSTALAYERNAME)
+        if len(layer) > 0:
+            if layer[0].isValid():
+                return layer[0]
+            else:
+                return None
+        else:
+            return None
+
+    # -----------------------------------------------------
+    # Update the status of the temporary GSTA layer created
+    # after a successfull GSTA computation
+    def updateGSTALayerButtonStatus(self):
+        self.GSTATemporaryLayerButton.setEnabled(False) 
+        layers = self.iface.legendInterface().layers()
+        for layer in layers:
+            if layer.name() == GSTALAYERNAME:
+                self.GSTATemporaryLayerButton.setEnabled(True)
+                
+    # -----------------------------------------------------
+    # Load the data from a previous valid GSTA temporary layer
+    # into the table view
+    def loadFromGSTATemporaryLayer(self):
+        # set the active layer the GSTA temporary layer
+        gstaLayer = self.getVectorLayerByName(GSTALAYERNAME)
+        if not self.iface.setActiveLayer(gstaLayer):
+            return
+        # To be sure that no selection is active yet
+        gstaLayer.removeSelection()
+        lineItemsList = []
+        features = processing.features(gstaLayer)
+        for feature in features:  # loop over all points
+            itemsList = []
+            itemsList.append(QtGui.QTableWidgetItem(u"%f"%feature.geometry().asPoint().x()))  # X
+            itemsList.append(QtGui.QTableWidgetItem(u"%f"%feature.geometry().asPoint().y()))  # Y
+            itemsList.append(QtGui.QTableWidgetItem("0.0"))                             # Z
+            idx = gstaLayer.fieldNameIndex('mean')
+            itemsList.append(QtGui.QTableWidgetItem(u"%f"%feature.attributes()[idx]))         # Mean
+            idx = gstaLayer.fieldNameIndex('sorting')
+            itemsList.append(QtGui.QTableWidgetItem(u"%f"%feature.attributes()[idx]))         # Sorting
+            idx = gstaLayer.fieldNameIndex('skewness')
+            itemsList.append(QtGui.QTableWidgetItem(u"%f"%feature.attributes()[idx]))         # Skewness
+            
+            lineItemsList.append(itemsList)
+        
+        self.gsta = GSTA(gstaLayer.crs())  
+        self.updateTableViewData(lineItemsList)
+
+    
     # -----------------------------------------------------
     # Return a list of the items present in the table widget
     def getItemsList(self):
@@ -909,6 +963,8 @@ class pygisedtrendDialog(QtGui.QDialog, Ui_pygisedtrend):
         
         # Enable the export tab
         self.tabDlg.setTabEnabled (4,True)
+        # Enable the GSTA temporary button
+        self.GSTATemporaryLayerButton.setEnabled(True)
         
         return
 
@@ -1008,7 +1064,7 @@ class pygisedtrendDialog(QtGui.QDialog, Ui_pygisedtrend):
             try:
                 textfile = open(fileName, 'w')
             except IOError as e:
-                QtGui.QMessageBox.error(self, u"Export dataset", u"Error when creating text file: %s" % e.strerror)
+                QtGui.QMessageBox.error(self, u"Export dataset", u"Error when creating text file: %s\n%s" % (textfile, e.strerror))
                 return
 
             # Write the header string at the begining
