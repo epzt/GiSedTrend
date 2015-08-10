@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_pygisedtrend_attribute_connect.ui'
 #
-# Created: Sun Sep 28 09:51:10 2014
-#      by: PyQt4 UI code generator 4.10.4
+# Created: Mon Aug 10 11:31:03 2015
+#      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 

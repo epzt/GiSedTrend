@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_pygisedtrend_text_file_analysis.ui'
 #
-# Created: Mon Sep 15 22:28:26 2014
-#      by: PyQt4 UI code generator 4.10.4
+# Created: Mon Aug 10 11:31:03 2015
+#      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
 

@@ -35,7 +35,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Close|QDialogButtonBox::Help</set>
+    <set>QDialogButtonBox::Close</set>
    </property>
   </widget>
   <widget class="QTabWidget" name="tabDlg">
@@ -217,7 +217,7 @@
        </rect>
       </property>
       <property name="text">
-       <string> Texte file...</string>
+       <string> Text file...</string>
       </property>
      </widget>
      <widget class="QPushButton" name="GSTATemporaryLayerButton">
@@ -286,7 +286,7 @@ p, li { white-space: pre-wrap; }
       <string>Shapefile...</string>
      </property>
     </widget>
-    <zorder>layoutWidget</zorder>
+    <zorder>pushButtonShapefile</zorder>
     <zorder>groupBox_6</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>pushButtonDeteleRow</zorder>

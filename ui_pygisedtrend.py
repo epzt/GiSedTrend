@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_pygisedtrend.ui'
 #
-# Created: Tue Aug  4 10:29:45 2015
+# Created: Mon Aug 10 11:31:03 2015
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,7 +32,7 @@ class Ui_pygisedtrend(object):
         self.buttonBox = QtGui.QDialogButtonBox(pygisedtrend)
         self.buttonBox.setGeometry(QtCore.QRect(490, 560, 201, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close|QtGui.QDialogButtonBox.Help)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close)
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.tabDlg = QtGui.QTabWidget(pygisedtrend)
         self.tabDlg.setGeometry(QtCore.QRect(0, 0, 701, 531))
@@ -451,7 +451,7 @@ class Ui_pygisedtrend(object):
         self.label_6.setText(_translate("pygisedtrend", "<html><head/><body><p><span style=\" font-weight:600; font-style:italic;\">Web site: </span><a href=\" http://www.geoceano.fr\"><span style=\" font-style:italic; text-decoration: underline; color:#0000ff;\">http://www.geoceano.fr</span></a></p></body></html>", None))
         self.tabDlg.setTabText(self.tabDlg.indexOf(self.tab), _translate("pygisedtrend", "GiSedTrend", None))
         self.groupBox_6.setTitle(_translate("pygisedtrend", "Select data from...", None))
-        self.pushButtonTextFile.setText(_translate("pygisedtrend", " Texte file...", None))
+        self.pushButtonTextFile.setText(_translate("pygisedtrend", " Text file...", None))
         self.GSTATemporaryLayerButton.setText(_translate("pygisedtrend", "From previous GSTA temporary layer", None))
         self.pushButtonDeteleRow.setText(_translate("pygisedtrend", "Delete line", None))
         self.label_11.setText(_translate("pygisedtrend", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
