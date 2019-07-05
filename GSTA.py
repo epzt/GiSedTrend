@@ -492,16 +492,25 @@ class GSTA():
     def GetXORBestCase(self, caseDict):
         # retreive keys matching max count and biggest module
         maxCountKey = max(caseDict, key=lambda k:caseDict[k]['count'])
+        sumCounts = 0
+        for i in caseDict:
+            sumCounts += caseDict[i]['count']
         maxModuleKey = max(caseDict, key=lambda k:caseDict[k]['module'])
+        sumModules = 0
+        for i in caseDict:
+            sumModules += caseDict[k]['module']
+
+        assert(sumCounts > 0)
+        assert(sumModules > 0)
         
         # If both keys are the same, return this key
         if maxCountKey == maxModuleKey:
             return maxModuleKey
-    
+
         # Compute probability for each key
-        pKeyOne = 0.5 * ((caseDict[maxCountKey]['count']/caseDict[maxCountKey]['count'])+(caseDict[maxCountKey]['module']/caseDict[maxCountKey]['module']))
-        pKeyTwo = 0.5 * ((caseDict[maxModuleKey]['count']/caseDict[maxModuleKey]['count'])+(caseDict[maxModuleKey]['module']/caseDict[maxModuleKey]['module']))
-        
+        pKeyOne = 0.5 * ((caseDict[maxCountKey]['count'] / sumCounts) + (caseDict[maxCountKey]['module'] / sumModules))
+        pKeyTwo = 0.5 * ((caseDict[maxModuleKey]['count'] / sumCounts) + (caseDict[maxModuleKey]['module'] / sumModules))
+
         # return the key of highest probability
         if pKeyOne >= pKeyTwo:
             return maxCountKey
