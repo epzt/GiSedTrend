@@ -498,7 +498,7 @@ class GSTA():
         maxModuleKey = max(caseDict, key=lambda k:caseDict[k]['module'])
         sumModules = 0
         for i in caseDict:
-            sumModules += caseDict[k]['module']
+            sumModules += caseDict[i]['module']
 
         assert(sumCounts > 0)
         assert(sumModules > 0)
